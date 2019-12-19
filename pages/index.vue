@@ -30,7 +30,7 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: red;
+    background-color: #333;
     margin-top: -50px;
   }
 
@@ -58,4 +58,10 @@ export default {
         font-size: 84px;
     }
 
+</style>
+
+<style>
+  .fa{
+    font-weight: 900;
+  }
 </style>

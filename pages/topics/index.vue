@@ -74,7 +74,7 @@ export default {
             alert('You have already liked this post')
           } else {
             await this.$axios.$post(`/topics/${topicId}/posts/${content.id}/likes`)
-            let {data, links} = await this.$axios.$get(`/topics`)
+            let {data, links} = await this.$axios.$get(`/topics?page=${this.$route.query.page || 1}`)
             this.topics = data
             this.links = links
           }

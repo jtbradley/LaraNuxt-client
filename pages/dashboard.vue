@@ -10,7 +10,6 @@
           id="title"
           v-model.trim="form.title"
           type="text"
-
           placeholder="Enter topic title"
           autofocus
         ></b-form-input>
@@ -31,7 +30,7 @@
         <small class="text-danger form-text" v-if="errors.body">{{errors.body[0]}}</small>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Create</b-button>
+      <b-button @click.prevent="onSubmit" variant="primary">Create</b-button>
     </b-form>
     <br>
   </div>
@@ -51,7 +50,12 @@ export default {
   methods: {
     async onSubmit() {
       await this.$axios.$post('/topics', this.form)
-      this.$router.push('/');
+      .then(response => {
+        this.$router.push('/topics');
+      })
+      .catch(error => {
+        //console.log(error.response)
+      })
     }
   }
 }

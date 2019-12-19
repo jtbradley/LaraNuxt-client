@@ -5,7 +5,7 @@
     <form @submit.prevent="update">
       <div class="form-group mt-5">
         <input type="text" class="form-control" v-model="topic.title">
-        <small v-if="errors.title" class="form-text tesxt-danger">{{errors.title[0]}}</small>
+        <small v-if="errors.title" class="form-text text-danger">{{errors.title[0]}}</small>
       </div>
       <button class="btn-outline-success">Update</button>
     </form>
@@ -33,9 +33,13 @@ export default {
     async update() {
       await this.$axios.patch(`/topics/${this.$route.params.id}`, {
         title: this.topic.title
+      }).then(response => {
+        //redirect
+        this.$router.push('/topics')
       })
-      //redirect
-      this.$router.push('/topics')
+      .catch(error => {
+        console.log(error.response)
+      })
     }
 
   }
