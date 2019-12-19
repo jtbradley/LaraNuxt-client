@@ -46,6 +46,7 @@
       }
     },
     methods: {
+      /*
       async onSubmit() {
         try {
         await this.$auth.loginWith("local", {
@@ -56,9 +57,23 @@
           path: this.$route.query.redirect || "/dashboard"
         });
       } catch(errors) {
-        // moved to plugins/axios
         //this.$router.push('/login');
       }
+    },*/
+    // This promise format over try catch:
+    async onSubmit() {
+      await this.$auth.loginWith("local", {
+          data: this.form
+      })
+      .then(response => {
+        this.$router.push({
+          path: this.$route.query.redirect || "/dashboard"
+        });
+      })
+      .catch(error => {
+        console.log(error.response)
+        this.$router.push('/login');
+      })
     }
   }
   }

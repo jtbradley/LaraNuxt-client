@@ -32,7 +32,7 @@
       <div class="form-group">
         <h4 for="">Add a new post</h4>
         <textarea v-model="body" type="text" class="form-control" placeholder="Write something" rows="5"></textarea>
-        <small v-if="errors.body" class="form-text tesxt-danger">{{errors.body[0]}}</small>
+        <small v-if="errors.body" class="form-text text-danger">{{errors.body[0]}}</small>
       </div>
       <button class="btn btn-outline-primary">Add a new post</button>
     </form>
@@ -58,11 +58,21 @@ export default {
   methods: {
     async create() {
       await this.$axios.$post(`/topics/${this.$route.params.id}/posts`, {body: this.body})
-      this.$router.push('/topics')
+      .then(response => {
+        this.$router.push('/topics')
+      })
+      .catch(error => {
+        //console.log(error.response)
+      })
     },
     async deletePost(id) {
       await this.$axios.$delete(`/topics/${this.$route.params.id}/posts/${id}`)
-      this.$router.push('/topics');
+      .then(response => {
+        this.$router.push('/topics')
+      })
+      .catch(error => {
+        //console.log(error.response)
+      })
     }
   }
 }
